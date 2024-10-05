@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.fullname }}
+  labels:
+    app.kubernetes.io/name: {{ .Values.labels }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name:  {{ .Values.selectorLabels }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ .Values.metadata.labels }}
+    spec:
+      containers:
+      - name: simple
+        image: hussainece/sample:dev
+        ports:
+        - containerPort: {{ .Values.containerPort }}
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html/config
+          name: config-files
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: my-react-app-demo
+        name: config-files
+
+        
+
+
+
