@@ -1,0 +1,6 @@
+{
+    "cluster": {
+      "name": "locam-cluster",
+      "address": "https://kubernetes.default.svc"
+    }
+  }
