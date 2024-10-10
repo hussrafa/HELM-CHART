@@ -2,14 +2,14 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: react-app-helm-appset
-  namespace: default
+  namespace: argocd
 spec:
   generators:
   - git:
       repoURL: https://github.com/hussrafa/HELM-CHART.git
       revision: HEAD
       files:
-      - path: "cluster-config/config.json"
+      - path: "react-app/cluster-config/config.json"
   template:
     metadata:
       name: '{{cluster.name}}-appset'
